@@ -4,9 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CommandTest {
+class CommandTest {
     @Test
     @DisplayName("存在するコマンドか判定する@DrawCommand")
     void testExistsDrawCommand() {
@@ -46,7 +45,6 @@ public class CommandTest {
         assertEquals("入力されたコマンド[A]は無効です。", exception.getMessage());
     }
 
-
     @Test
     @DisplayName("引数が必要なコマンドかどうか判定する")
     void testCheckArgument() {
@@ -59,33 +57,31 @@ public class CommandTest {
 
     @Test
     @DisplayName("Pを実行する")
-    void testPcommandExecute(){
+    void testPcommandExecute() {
         Command p = Command.of("P");
         assertEquals("2番目のペンを使います。", p.execute(2));
 
-        Throwable exception = assertThrows(IllegalArgumentException.class,
-                () -> p.execute());
+        Throwable exception = assertThrows(IllegalArgumentException.class, p::execute);
         assertEquals("コマンド[P]:何番目のペンを使用するか指定してください。", exception.getMessage());
     }
 
     @Test
     @DisplayName("方角のコマンドを実行する")
-    void testDirectionCommandExecute(){
+    void testDirectionCommandExecute() {
         Command n = Command.of("N");
         assertEquals("北方向にペンを2cm動かしました。", n.execute(2));
 
         Command e = Command.of("E");
         assertEquals("東方向にペンを3cm動かしました。", e.execute(3));
 
-        Throwable exception = assertThrows(IllegalArgumentException.class,
-                () -> n.execute());
+        Throwable exception = assertThrows(IllegalArgumentException.class, n::execute);
         assertEquals("コマンド[N]:ペンを何cm動かすか指定してください。", exception.getMessage());
 
     }
 
     @Test
     @DisplayName("Uを実行する")
-    void testUcommandExecute(){
+    void testUcommandExecute() {
         Command u = Command.of("U");
         assertEquals("ペンを紙から離しました。", u.execute());
 
@@ -97,7 +93,7 @@ public class CommandTest {
 
     @Test
     @DisplayName("Dを実行する")
-    void testDcommandExecute(){
+    void testDcommandExecute() {
         Command d = Command.of("D");
         assertEquals("ペンを紙におろしました。", d.execute());
 

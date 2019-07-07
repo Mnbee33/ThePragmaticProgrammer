@@ -35,6 +35,17 @@ public enum DrawCommand implements Command {
             return "ペンを紙におろしました。";
         }
     },
+    Q(false) {
+        @Override
+        public String execute(int i) {
+            throw forbidExecutingWithArgs(toString());
+        }
+
+        @Override
+        public String execute() {
+            return "お絵かきプログラムを終了します。";
+        }
+    },
     ;
 
     boolean needArguments;
